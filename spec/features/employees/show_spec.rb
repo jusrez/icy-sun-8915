@@ -40,7 +40,7 @@ RSpec.describe 'Employee Show' do
         end
       end
 
-      it 'I do not see any tickets listed that are not assigned to the employee and i see a form to add a ticket to this movie' do
+      it 'I do not see any tickets listed that are not assigned to the employee and i see a form to add a ticket to this employee' do
         department1 = Department.create!(name: 'IT', floor: 'Basement')
         it_employee = Employee.create!(name: "Sherry Berry", level: 3, department_id: department1.id)
         ticket1 = Ticket.create!(subject: "Paper jam", age: 3)
@@ -60,6 +60,10 @@ RSpec.describe 'Employee Show' do
        
         expect(page).to have_content(ticket1.subject)
       end
+
+      # it ' will show me the employees name and levvel and a unique list of all the other employees that this employee shares tickets with' do
+        
+      # end
     end
   end
 end
