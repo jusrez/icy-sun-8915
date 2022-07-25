@@ -1,0 +1,16 @@
+<h2>Employee #<%= @employee.id %> Profile</h2>
+<p>Name: <%= @employee.name %></p>
+<p>Department: <%= @employee.department.name %></p>
+<p>List of open tickets (oldest to youngest):</p>
+
+<% @employee.oldest_to_youngest.each_with_index do |ticket, index| %>
+<div id = "ticket-<%= index %>">
+  <ul><li>Subject: <%= ticket.subject %></li>
+  <li>Ticket age (in days): <%= ticket.age %></li></ul>
+</div>
+<% end %>
+
+<p>Oldest Ticket:</p>
+<div id = "oldest_ticket-<%= @employee.oldest_to_youngest.first.id %>">
+<%= @employee.oldest_to_youngest.first.subject %>
+</div>

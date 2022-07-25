@@ -13,7 +13,7 @@ RSpec.describe 'Department Index' do
         marketing_employee = Employee.create!(name: "Brad Pitt", level: 5, department_id: department3.id)
 
         visit '/departments'
-        save_and_open_page
+   
         within "#department-#{department1.id}" do
           expect(page).to have_content("IT")
           expect(page).to have_content("Basement")
