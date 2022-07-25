@@ -39,6 +39,27 @@ RSpec.describe 'Employee Show' do
           expect(page).to have_content(ticket2.subject)
         end
       end
+
+      it 'I do not see any tickets listed that are not assigned to the employee and i see a form to add a ticket to this movie' do
+        department1 = Department.create!(name: 'IT', floor: 'Basement')
+        it_employee = Employee.create!(name: "Sherry Berry", level: 3, department_id: department1.id)
+        ticket1 = Ticket.create!(subject: "Paper jam", age: 3)
+        ticket2 = Ticket.create!(subject: "Out of toner", age: 12)
+        ticket3 = Ticket.create!(subject: "Mouse broken", age: 5)
+
+        visit "/employees/#{it_employee.id}"
+
+        expect(page).to_not have_content(ticket1.subject)
+        expect(page).to_not have_content(ticket2.subject)
+        expect(page).to_not have_content(ticket3.subject)
+        
+        fill_in 'Ticket', with: "#{ticket1.id}"
+        click_button 'Assign ticket'
+        
+        expect(current_path).to eq("/employees/#{it_employee.id}")
+       
+        expect(page).to have_content(ticket1.subject)
+      end
     end
   end
 end
